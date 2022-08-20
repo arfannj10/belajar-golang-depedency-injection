@@ -8,7 +8,7 @@ import (
 )
 
 func TestConnection(t *testing.T) {
-	connection, cleanup := simple.InitializeConnection("Database")
+	connection, cleanup := simple.InitializedConnection("Database")
 	assert.NotNil(t, connection)
 
 	cleanup()

@@ -10,14 +10,14 @@ import (
 	"os"
 )
 
-func InitializeService(isError bool) (*SimpleService, error) {
+func InitializedService(isError bool) (*SimpleService, error) {
 	wire.Build(
 		NewSimpleRepository, NewSimpleService,
 	)
 	return nil, nil
 }
 
-func InitializeDatabaseRepository() *DatabaseRepository {
+func InitializedDatabaseRepository() *DatabaseRepository {
 	wire.Build(
 		NewDatabaseMongoDB,
 		NewDatabasePostgreSQL,
@@ -30,7 +30,7 @@ var fooSet = wire.NewSet(NewFooRepository, NewFooService)
 
 var barSet = wire.NewSet(NewBarRepository, NewBarService)
 
-func InitializeFooBarService() *FooBarService {
+func InitializedFooBarService() *FooBarService {
 	wire.Build(fooSet, barSet, NewFooBarService)
 	return nil
 }
@@ -46,12 +46,12 @@ var HelloSet = wire.NewSet(
 	wire.Bind(new(SayHello), new(*SayHelloImpl)),
 )
 
-func InitializeHelloService() *HelloService {
+func InitializedHelloService() *HelloService {
 	wire.Build(HelloSet, NewHelloService)
 	return nil
 }
 
-func InitializeFooBar() *FooBar {
+func InitializedFooBar() *FooBar {
 	wire.Build(NewFoo, NewBar, wire.Struct(new(FooBar), "*"))// bisa pakek * for all foo & bar
 	return nil
 }
@@ -59,7 +59,7 @@ func InitializeFooBar() *FooBar {
 var fooValue = &Foo{}
 var barValue = &Bar{}
 
-func InitializeFooBarUsingValue() *FooBar {
+func InitializedFooBarUsingValue() *FooBar {
 	wire.Build(wire.Value(fooValue), wire.Value(barValue), wire.Struct(new(FooBar), "*"))
 	return nil
 }
@@ -69,7 +69,7 @@ func InitializeReader() io.Reader {
 	return nil
 }
 
-func InitializeConfiguration() *Configuration {
+func InitializedConfiguration() *Configuration {
 	wire.Build(
 		NewApplication,
 		wire.FieldsOf(new(*Application), "Configuration"),
@@ -77,7 +77,7 @@ func InitializeConfiguration() *Configuration {
 	return nil
 }
 
-func InitializeConnection(name string)(*Connection, func()){
+func InitializedConnection(name string)(*Connection, func()){
 	wire.Build(NewConnection,NewFile)
 	return nil, nil
 }

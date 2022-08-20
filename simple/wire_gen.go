@@ -14,7 +14,7 @@ import (
 
 // Injectors from injector.go:
 
-func InitializeService(isError bool) (*SimpleService, error) {
+func InitializedService(isError bool) (*SimpleService, error) {
 	simpleRepository := NewSimpleRepository(isError)
 	simpleService, err := NewSimpleService(simpleRepository)
 	if err != nil {
@@ -23,14 +23,14 @@ func InitializeService(isError bool) (*SimpleService, error) {
 	return simpleService, nil
 }
 
-func InitializeDatabaseRepository() *DatabaseRepository {
+func InitializedDatabaseRepository() *DatabaseRepository {
 	databasePostgreSQL := NewDatabaseMongoDB()
 	databaseMongoDB := NewDatabasePostgreSQL()
 	databaseRepository := NewDatabaseRepository(databasePostgreSQL, databaseMongoDB)
 	return databaseRepository
 }
 
-func InitializeFooBarService() *FooBarService {
+func InitializedFooBarService() *FooBarService {
 	fooRepository := NewFooRepository()
 	fooService := NewFooService(fooRepository)
 	barRepository := NewBarRepository()
@@ -39,13 +39,13 @@ func InitializeFooBarService() *FooBarService {
 	return fooBarService
 }
 
-func InitializeHelloService() *HelloService {
+func InitializedHelloService() *HelloService {
 	sayHelloImpl := NewSayHelloImpl()
 	helloService := NewHelloService(sayHelloImpl)
 	return helloService
 }
 
-func InitializeFooBar() *FooBar {
+func InitializedFooBar() *FooBar {
 	foo := NewFoo()
 	bar := NewBar()
 	fooBar := &FooBar{
@@ -55,7 +55,7 @@ func InitializeFooBar() *FooBar {
 	return fooBar
 }
 
-func InitializeFooBarUsingValue() *FooBar {
+func InitializedFooBarUsingValue() *FooBar {
 	foo := _wireFooValue
 	bar := _wireBarValue
 	fooBar := &FooBar{
@@ -79,13 +79,13 @@ var (
 	_wireFileValue = os.Stdin
 )
 
-func InitializeConfiguration() *Configuration {
+func InitializedConfiguration() *Configuration {
 	application := NewApplication()
 	configuration := application.Configuration
 	return configuration
 }
 
-func InitializeConnection(name string) (*Connection, func()) {
+func InitializedConnection(name string) (*Connection, func()) {
 	file, cleanup := NewFile(name)
 	connection, cleanup2 := NewConnection(file)
 	return connection, func() {
