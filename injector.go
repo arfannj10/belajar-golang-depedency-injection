@@ -26,12 +26,12 @@ var categorySet = wire.NewSet(
 
 func InitializedServer() *http.Server {
 	wire.Build(
-		app.NewDB, 
-		validator.New, 
-		categorySet, 
-		app.NewRouter, 
+		app.NewDB,
+		validator.New,
+		categorySet,
+		app.NewRouter,
 		wire.Bind(new(http.Handler), new(*httprouter.Router)),
-		middleware.NewAuthMiddleware, 
+		middleware.NewAuthMiddleware,
 		NewServer,
 	)
 	return nil
